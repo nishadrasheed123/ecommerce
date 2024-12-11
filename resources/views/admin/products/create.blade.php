@@ -95,11 +95,7 @@
                 <input type="radio" name="status" value="0"> Stock Out
               </div>
 
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="isFavorite" name="is_favorite">
-                <label class="form-check-label" for="isFavorite">Mark as Favorite</label>
-              </div>
-            </div>
+              
 
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button>

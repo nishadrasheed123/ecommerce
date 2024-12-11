@@ -11,12 +11,23 @@ Route::name('admin.')->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
+
 Route::name('product.')->prefix('admin/products')->group(function () {
+    // Product List
     Route::get('/', [ProductController::class, 'list'])->name('list');
+
+    // Create New Product
     Route::get('create', [ProductController::class, 'create'])->name('create');
     Route::post('save', [ProductController::class, 'save'])->name('save');
 
+    // Edit Product
+    Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::put('update/{id}', [ProductController::class, 'update'])->name('update');
+
+    // Delete Product
+    Route::delete('delete/{id}', [ProductController::class, 'delete'])->name('delete');
 });
+
 
 
 

@@ -22,8 +22,15 @@ class ProductSaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'price' => ['required']
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'size' => 'nullable|string|max:10',
+            'price' => 'required|numeric|min:0',
+            'sex' => 'nullable|string|max:10',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
+            'status' => 'required|boolean',
+            'is_favorite' => 'nullable|boolean',
         ];
     }
 }
