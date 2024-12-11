@@ -9,7 +9,14 @@ Route::name('admin.')->group(function () {
     // Route::post('admin/do-login', [LoginController::class, 'doLogin'])->name('do.login');
     Route::post('/admin/do-login', [LoginController::class, 'doLogin'])->name('admin.doLogin');
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('admin/products', [ProductController::class, 'list'])->name('product.list');
 });
+
+Route::name('product.')->prefix('admin/products')->group(function () {
+    Route::get('/', [ProductController::class, 'list'])->name('list');
+    Route::get('create', [ProductController::class, 'create'])->name('create');
+    Route::post('save', [ProductController::class, 'save'])->name('save');
+
+});
+
 
 

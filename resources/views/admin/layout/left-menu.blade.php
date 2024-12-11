@@ -33,28 +33,30 @@
             </li>
            
             <li class="sidebar-item">
-              <a
-                class="sidebar-link sidebar-link warning-hover-bg"
-                href="./ui-buttons.html"
-                aria-expanded="false"
-              >
-                <span class="aside-icon p-2 bg-light-warning rounded-3">
-                  <i class="ti ti-article fs-7 text-warning"></i>
-                </span>
-                <span class="hide-menu ms-2 ps-1">Add Products</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
     <a 
-        class="sidebar-link danger-hover-bg" 
-        href="{{ route('admin.product.list') }}" 
+        class="sidebar-link warning-hover-bg" 
+        href="{{ route('product.create') }}" 
         aria-expanded="false"
     >
-        <span class="aside-icon p-2 bg-light-danger rounded-3">
-            <i class="ti ti-alert-circle fs-7 text-danger"></i>
+        <span class="aside-icon p-2 bg-light-warning rounded-3">
+            <i class="ti ti-article fs-7 text-warning"></i>
         </span>
-        <span class="hide-menu ms-2 ps-1">Products</span>
+        <span class="hide-menu ms-2 ps-1">Add Products</span>
     </a>
+</li>
+
+            <li class="sidebar-item">
+            <a 
+    class="sidebar-link danger-hover-bg" 
+    href="{{ route('product.list') }}" 
+    aria-expanded="false"
+>
+    <span class="aside-icon p-2 bg-light-danger rounded-3">
+        <i class="ti ti-alert-circle fs-7 text-danger"></i>
+    </span>
+    <span class="hide-menu ms-2 ps-1">Products</span>
+</a>
+
 </li>
 
             
