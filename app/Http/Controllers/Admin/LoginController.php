@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function index()
     { 
         // Return the view for the admin login page
-        return view('admin.dashboard');
+        return view('admin.login');
     }
 
     /**

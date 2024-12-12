@@ -23,6 +23,7 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Price</th>
+                                <th>Image</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -34,6 +35,13 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name ?? 'N/A' }}</td>
                                 <td>${{ number_format($product->price, 2) }}</td>
+                                <td>
+                                    @if($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="max-width: 100px;">
+                                    @else
+                                        No image
+                                    @endif
+                                </td>
                                 <td>{{ $product->status == 1 ? 'In Stock' : 'Stock Out' }}</td>
                                 <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>  

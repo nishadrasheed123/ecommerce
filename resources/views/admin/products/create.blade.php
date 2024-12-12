@@ -1,4 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Custom Card Styles */
+    .card-custom {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: none;
+    }
 
+    /* Form Field Styling */
+    .card-body .form-control {
+      border-radius: 5px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .card-body .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      outline: none;
+    }
+
+    /* Custom Header Styling */
+    .card-header {
+      background: #ffede9;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    /* Button Styles */
+    .btn-primary {
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
 @extends('admin.layout.master')    
 @section('content')
 
@@ -22,10 +74,10 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="card card-primary">
-          <div class="card-header">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card card-custom shadow-sm mt-4">
+          <div class="card-header text-center">
             <h3 class="card-title">Product Information</h3>
           </div>
           <form action="{{ route('product.save') }}" method="POST" enctype="multipart/form-data">
@@ -41,25 +93,8 @@
                 <select class="form-control" id="category" name="category_id" required>
                   <option value="">Select Category</option>
                   @foreach ($categories as $category)
-                   <option value="{{$category->id}}">{{$category->name}}</option>
-                   @endforeach
-               
-                    
-                
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="size">Size</label>
-                <select class="form-control" id="size" name="size">
-                  <option value="" disabled selected>Select Size</option>
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
-                  <option value="XXXL">XXXL</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
                 </select>
               </div>
 
@@ -69,35 +104,29 @@
               </div>
 
               <div class="form-group">
-                <label>Sex</label><br>
-                <input type="radio" name="sex" value="Male" required> Male
-                <input type="radio" name="sex" value="Female" required> Female
-              </div>
-
-              <div class="form-group">
-                <label for="image">Product Image</label>
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="image" name="image">
-                    <label class="custom-file-label" for="image">Choose file</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter product description"></textarea>
               </div>
 
               <div class="form-group">
-                <label>Status</label><br>
-                <input type="radio" name="status" value="1" checked> In Stock
-                <input type="radio" name="status" value="0"> Stock Out
+                <label for="productImage">Product Image</label>
+                <input type="file" class="form-control" id="productImage" name="image" accept="image/*">
               </div>
 
-              
+              <div class="form-group">
+                <label>Status</label><br>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="statusInStock" name="status" value="1" class="custom-control-input" checked>
+                  <label class="custom-control-label" for="statusInStock">In Stock</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="statusOutOfStock" name="status" value="0" class="custom-control-input">
+                  <label class="custom-control-label" for="statusOutOfStock">Stock Out</label>
+                </div>
+              </div>
+            </div>
 
-            <div class="card-footer">
+            <div class="card-footer text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
@@ -107,5 +136,7 @@
   </div>
 </section>
 
-  
 @endsection
+
+</body>
+</html>

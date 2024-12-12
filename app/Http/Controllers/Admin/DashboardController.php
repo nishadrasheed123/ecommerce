@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -19,8 +21,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Return the admin dashboard view
-        return view('admin.dashboard');
+        $totalProducts = Product::count();
+        $productsInStock = Product::where('status', 1)->count();
+        $productsOutOfStock = Product::where('status', 0)->count();
+        $recentProducts = Product::latest()->take(5)->get();
+
+        return view('admin.dashboard', compact('totalProducts', 'productsInStock', 'productsOutOfStock', 'recentProducts'));
     }
 }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductSaveRequest;
 use App\Models\Product;
 
-
+ 
 class ProductController 
 {
     public function list(){
@@ -17,15 +17,29 @@ class ProductController
         $categories=Category::all();
         return view('admin.products.create',compact('categories'));
     }
-    public function save(ProductSaveRequest $request){
-        $input=$request->validated();
-        Product::create($input);
-        return redirect()->route('product.list')->with('message','product save succesfully');
+    public function save(ProductSaveRequest $request)
+    {
+        // Validate input
+        $input = $request->validated();
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+            $input['image'] = $imagePath; // Save the file path in the database
+            $extension=$request->image->extension();
+        }
     }
-    public function edit($id) {
+    
+    public function edit($id)
+    {
         $product = Product::findOrFail($id);
-        return view('admin.product.edit', compact('product'));
+    
+        $categories = Category::all();
+    
+        
+        return view('admin.products.edit', compact('product', 'categories'));
     }
+    
     
     public function update(Request $request, $id) {
         $product = Product::findOrFail($id);
@@ -37,6 +51,8 @@ class ProductController
         Product::findOrFail($id)->delete();
         return redirect()->route('product.list')->with('message', 'Product deleted successfully');
     }
+   
+
     
     
 }
